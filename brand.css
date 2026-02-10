@@ -1,0 +1,197 @@
+/* ========================================
+   RAFIX - Brand Page Styles
+   ======================================== */
+
+/* ========================================
+   Brand About Section
+   ======================================== */
+.brand-about {
+  padding: 6rem 0;
+  background: white;
+}
+
+.brand-about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .brand-about-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.brand-about-text .label {
+  display: inline-block;
+  color: var(--brand-orange);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.brand-about-text h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .brand-about-text h2 {
+    font-size: 2.5rem;
+  }
+}
+
+.brand-about-text p {
+  color: var(--gray-600);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+.brand-about-text p:last-of-type {
+  margin-bottom: 0;
+}
+
+.brand-about-features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .brand-about-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.brand-about-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: var(--gray-50);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 1px solid var(--gray-100);
+  transition: all 0.3s;
+}
+
+.brand-about-feature:hover {
+  border-color: var(--brand-blue);
+  background: rgba(239, 246, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.brand-about-feature-icon {
+  width: 3rem;
+  height: 3rem;
+  background: rgba(43, 90, 155, 0.1);
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+
+.brand-about-feature-icon svg {
+  color: var(--brand-blue);
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.brand-about-feature:hover .brand-about-feature-icon {
+  background: var(--brand-blue);
+}
+
+.brand-about-feature:hover .brand-about-feature-icon svg {
+  color: white;
+}
+
+.brand-about-feature h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 0.25rem;
+}
+
+.brand-about-feature p {
+  color: var(--gray-500);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* ========================================
+   Brand Appliances Section
+   ======================================== */
+.brand-appliances {
+  padding: 6rem 0;
+  background: var(--gray-50);
+}
+
+.brand-appliances .services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .brand-appliances .services-grid {
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .brand-appliances .services-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ========================================
+   Brand Hero - Button spacing fix
+   ======================================== */
+.detail-hero .detail-hero-actions {
+  margin-bottom: 2rem;
+}
+
+/* ========================================
+   Brand Hero Logo (replaces appliance image)
+   ======================================== */
+.dhero-brand-logo {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dhero-brand-logo-inner {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 3rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.dhero-brand-logo-inner:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+}
+
+.dhero-brand-logo-inner img {
+  max-width: 280px;
+  width: 100%;
+  height: auto;
+}
