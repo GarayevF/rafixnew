@@ -362,6 +362,60 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ========================================
+  // Service Areas Slider (paginated)
+  // ========================================
+  var areasSliderTrack = document.querySelector('.areas-slider-track');
+  var areasSliderDots = document.querySelector('.areas-slider-dots');
+  var areasPages = document.querySelectorAll('.areas-slider-page');
+
+  if (areasSliderTrack && areasSliderDots && areasPages.length > 0) {
+    var areasCurrentPage = 0;
+    var totalAreasPages = areasPages.length;
+
+    function buildAreasDots() {
+      areasSliderDots.innerHTML = '';
+      for (var i = 0; i < totalAreasPages; i++) {
+        var dot = document.createElement('button');
+        dot.className = i === areasCurrentPage ? 'active' : '';
+        dot.setAttribute('aria-label', 'Page ' + (i + 1));
+        (function(idx) {
+          dot.addEventListener('click', function() {
+            areasGoToPage(idx);
+          });
+        })(i);
+        areasSliderDots.appendChild(dot);
+      }
+    }
+
+    function areasGoToPage(pageIndex) {
+      areasCurrentPage = pageIndex;
+      areasSliderTrack.style.transform = 'translateX(-' + (areasCurrentPage * 100) + '%)';
+      var dots = areasSliderDots.querySelectorAll('button');
+      dots.forEach(function(dot, idx) {
+        dot.classList.toggle('active', idx === areasCurrentPage);
+      });
+    }
+
+    // Touch/swipe support
+    var areasSwipeX = 0;
+    areasSliderTrack.addEventListener('touchstart', function(e) {
+      areasSwipeX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    areasSliderTrack.addEventListener('touchend', function(e) {
+      var diff = areasSwipeX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0 && areasCurrentPage < totalAreasPages - 1) {
+          areasGoToPage(areasCurrentPage + 1);
+        } else if (diff < 0 && areasCurrentPage > 0) {
+          areasGoToPage(areasCurrentPage - 1);
+        }
+      }
+    }, { passive: true });
+
+    buildAreasDots();
+  }
+
+  // ========================================
   // Smooth Scroll for Anchor Links
   // ========================================
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
@@ -403,5 +457,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
   animateOnScroll.forEach(el => {
     observer.observe(el);
+  });
+
+  // ========================================
+  // Lazy-load Videos after page fully loads
+  // ========================================
+  window.addEventListener('load', function () {
+    var lazyVideos = document.querySelectorAll('.video-card video[data-src]');
+    lazyVideos.forEach(function (video) {
+      video.src = video.getAttribute('data-src');
+      video.removeAttribute('data-src');
+      video.load();
+      video.play().catch(function () {});
+    });
   });
 });
