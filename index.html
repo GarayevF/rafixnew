@@ -386,17 +386,17 @@
           <div class="stats-grid">
             <div class="stat-col">
               <div class="stat-card">
-                <div class="stat-number">15+</div>
+                <div class="stat-number" data-digits>15+</div>
                 <div class="stat-label">Years Experience</div>
               </div>
               <div class="stat-card">
-                <div class="stat-number">10k+</div>
+                <div class="stat-number" data-digits>10k+</div>
                 <div class="stat-label">Repairs Completed</div>
               </div>
             </div>
             <div class="stat-col">
               <div class="stat-card">
-                <div class="stat-number">4.9</div>
+                <div class="stat-number" data-digits>4.9</div>
                 <div class="stars">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -407,7 +407,7 @@
                 <div class="stat-label">Average Rating</div>
               </div>
               <div class="stat-card">
-                <div class="stat-number">100%</div>
+                <div class="stat-number" data-digits>100%</div>
                 <div class="stat-label">Satisfaction Guarantee</div>
               </div>
             </div>
@@ -492,6 +492,7 @@
         <span class="label">Testimonials</span>
         <h2>What Our Customers Say</h2>
         <div class="rating-display">
+          <img src="google-icon.png" alt="Google" class="rating-google-icon">
           <div class="stars">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -941,6 +942,43 @@
                 <div class="form-group">
                   <label>Zip Code</label>
                   <input type="text" required placeholder="97204" maxlength="10">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Appliance</label>
+                  <select required>
+                    <option value="" disabled selected>Select Appliance</option>
+                    <option value="refrigerator">Refrigerator</option>
+                    <option value="washer">Washer</option>
+                    <option value="dryer">Dryer</option>
+                    <option value="dishwasher">Dishwasher</option>
+                    <option value="oven">Oven / Range</option>
+                    <option value="microwave">Microwave</option>
+                    <option value="freezer">Freezer</option>
+                    <option value="ice-maker">Ice Maker</option>
+                    <option value="garbage-disposal">Garbage Disposal</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Brand</label>
+                  <select required>
+                    <option value="" disabled selected>Select Brand</option>
+                    <option value="whirlpool">Whirlpool</option>
+                    <option value="samsung">Samsung</option>
+                    <option value="lg">LG</option>
+                    <option value="ge">GE</option>
+                    <option value="maytag">Maytag</option>
+                    <option value="kitchenaid">KitchenAid</option>
+                    <option value="frigidaire">Frigidaire</option>
+                    <option value="bosch">Bosch</option>
+                    <option value="miele">Miele</option>
+                    <option value="sub-zero">Sub-Zero</option>
+                    <option value="viking">Viking</option>
+                    <option value="other">Other</option>
+                  </select>
                 </div>
               </div>
 

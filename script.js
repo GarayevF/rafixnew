@@ -460,6 +460,117 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ========================================
+  // Card Scroll Animations
+  // ========================================
+  var cardSelectors = [
+    '.service-card',
+    '.discount-card',
+    '.feature-item',
+    '.step',
+    '.video-card',
+    '.stat-card',
+    '.testimonial-card',
+    '.area-item',
+    '.areas-callout',
+    '.brand-item',
+    '.areas-map-col',
+    '.areas-info-col'
+  ];
+
+  // Group cards by parent section for proper stagger
+  var allSections = document.querySelectorAll('.services, .discounts, .why-us, .how-it-works, .testimonials, .service-areas, .gallery, .videos-section, .brands, .contact');
+  allSections.forEach(function (section) {
+    var sectionCards = section.querySelectorAll(cardSelectors.join(','));
+    sectionCards.forEach(function (card, idx) {
+      card.classList.add('card-animate');
+      card.style.transitionDelay = idx * 0.1 + 's';
+    });
+  });
+
+  var allCards = document.querySelectorAll('.card-animate');
+
+  var cardObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        cardObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  allCards.forEach(function (card) {
+    cardObserver.observe(card);
+  });
+
+  // Section-level animations for section headers and large blocks
+  var sectionAnimateEls = document.querySelectorAll('.discounts .section-header, .testimonials .section-header, .service-areas .section-header, .videos-section .section-header, .contact-info, .contact-form-container');
+  sectionAnimateEls.forEach(function (el) {
+    el.classList.add('section-animate');
+  });
+
+  var sectionObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        sectionObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  sectionAnimateEls.forEach(function (el) {
+    sectionObserver.observe(el);
+  });
+
+  // ========================================
+  // Stat Digit Slide-Up Animation
+  // ========================================
+  var digitElements = document.querySelectorAll('.stat-number[data-digits]');
+  var digitsAnimated = false;
+
+  // Prepare: wrap each character in spans
+  digitElements.forEach(function (el) {
+    var text = el.textContent.trim();
+    el.textContent = '';
+    for (var i = 0; i < text.length; i++) {
+      var wrap = document.createElement('span');
+      wrap.className = 'digit-wrap';
+      var charSpan = document.createElement('span');
+      charSpan.className = 'digit-char';
+      charSpan.textContent = text[i];
+      wrap.appendChild(charSpan);
+      el.appendChild(wrap);
+    }
+  });
+
+  var digitsObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting && !digitsAnimated) {
+        digitsAnimated = true;
+        // Gather all digit-char spans across all stat-numbers in order
+        var allChars = [];
+        digitElements.forEach(function (el) {
+          var chars = el.querySelectorAll('.digit-char');
+          chars.forEach(function (c) { allChars.push(c); });
+        });
+        // Stagger each character
+        allChars.forEach(function (charEl, i) {
+          charEl.style.transitionDelay = i * 0.04 + 's';
+        });
+        // Trigger
+        digitElements.forEach(function (el) {
+          el.classList.add('digits-visible');
+        });
+        digitsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  var statsSection = document.querySelector('.why-us-right');
+  if (statsSection) {
+    digitsObserver.observe(statsSection);
+  }
+
+  // ========================================
   // Lazy-load Videos after page fully loads
   // ========================================
   window.addEventListener('load', function () {
