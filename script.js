@@ -571,6 +571,84 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ========================================
+  // Form Modal (popup)
+  // ========================================
+  var formModal = document.getElementById('form-modal');
+  var openModalBtn = document.getElementById('open-form-modal');
+  var closeModalBtn = document.getElementById('close-form-modal');
+  var formModalBody = formModal ? formModal.querySelector('.form-modal-body') : null;
+
+  if (formModal && openModalBtn && formModalBody) {
+    // Clone the form container into the modal on first open
+    var modalReady = false;
+
+    function prepareModal() {
+      if (modalReady) return;
+      var originalContainer = document.querySelector('.contact-form-container');
+      if (originalContainer) {
+        var clone = originalContainer.cloneNode(true);
+        // Remove section-animate classes from clone
+        clone.classList.remove('section-animate', 'card-animate', 'in-view');
+        formModalBody.appendChild(clone);
+
+        // Handle form submit in modal
+        var modalForm = clone.querySelector('form');
+        var modalSuccess = clone.querySelector('.form-success');
+        var modalBookAnother = clone.querySelector('.book-another');
+        if (modalForm) {
+          modalForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var btn = modalForm.querySelector('.submit-btn');
+            btn.innerHTML = 'Sending...';
+            btn.disabled = true;
+            setTimeout(function () {
+              modalForm.style.display = 'none';
+              if (modalSuccess) modalSuccess.classList.add('show');
+            }, 1500);
+          });
+        }
+        if (modalBookAnother) {
+          modalBookAnother.addEventListener('click', function () {
+            if (modalSuccess) modalSuccess.classList.remove('show');
+            modalForm.style.display = 'block';
+            modalForm.reset();
+            var btn = modalForm.querySelector('.submit-btn');
+            btn.innerHTML = 'Claim $25 Off & Schedule <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
+            btn.disabled = false;
+          });
+        }
+        modalReady = true;
+      }
+    }
+
+    function openFormModal() {
+      prepareModal();
+      formModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeFormModal() {
+      formModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    openModalBtn.addEventListener('click', openFormModal);
+    closeModalBtn.addEventListener('click', closeFormModal);
+
+    // Close on overlay click
+    formModal.addEventListener('click', function (e) {
+      if (e.target === formModal) closeFormModal();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && formModal.classList.contains('active')) {
+        closeFormModal();
+      }
+    });
+  }
+
+  // ========================================
   // Lazy-load Videos after page fully loads
   // ========================================
   window.addEventListener('load', function () {

@@ -496,6 +496,9 @@ input, textarea {
   border-radius: 0.5rem;
   font-weight: 700;
   font-size: 1.125rem;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
   transition: all 0.3s;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
@@ -2627,6 +2630,96 @@ input, textarea {
 
 .stat-number.digits-visible .digit-char {
   transform: translateY(0);
+}
+
+/* ========================================
+   Form Modal
+   ======================================== */
+.form-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.form-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.form-modal {
+  background: white;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.3s ease;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+}
+
+.form-modal-overlay.active .form-modal {
+  transform: translateY(0) scale(1);
+}
+
+.form-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 10;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: none;
+  background: var(--gray-100);
+  color: var(--gray-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.form-modal-close:hover {
+  background: var(--gray-200);
+  color: var(--gray-900);
+}
+
+.form-modal-body .contact-form-container {
+  width: 100% !important;
+  max-width: none;
+  position: static;
+  background: white;
+  border-radius: 0;
+}
+
+.form-modal-body .offer-banner {
+  border-radius: 1rem 1rem 0 0;
+}
+
+.form-modal-body .contact-form {
+  padding: 1.5rem;
+}
+
+.form-modal-body .form-row {
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 480px) {
+  .form-modal-body .form-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ========================================
