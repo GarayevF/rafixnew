@@ -62,14 +62,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ========================================
-  // Discount Banner Click
+  // Discount Banner Click → open form modal
   // ========================================
   const discountBanner = document.querySelector('.discount-banner');
   discountBanner.addEventListener('click', function() {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (window._openFormModal) window._openFormModal();
   });
 
   // ========================================
@@ -626,6 +623,12 @@ document.addEventListener('DOMContentLoaded', function() {
       formModal.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
+    window._openFormModal = openFormModal;
+
+    // All elements with .open-form-trigger open the modal
+    document.querySelectorAll('.open-form-trigger').forEach(function (btn) {
+      btn.addEventListener('click', openFormModal);
+    });
 
     function closeFormModal() {
       formModal.classList.remove('active');
